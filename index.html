@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuro de los Medios de comunicación</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    document.getElementById('survey-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita el envío normal del formulario
+
+        const formData = new FormData(event.target);
+        const data = {};
+        
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('https://formspree.io/f/xldewedy', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Gracias por enviar tu respuesta!');
+                document.getElementById('survey-form').reset(); // Reinicia el formulario
+            } else {
+                alert('Ocurrió un error al enviar tu respuesta.');
+            }
+        })
+        .catch(error => {
+            alert('Ocurrió un error al enviar tu respuesta.');
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+<body>
+    <div class="container">
+        <h1>Futuro de los Medios de comunicación</h1>
+        <form id="survey-form">
+            <div class="question">
+                <label for="age">¿Qué edad tienes?</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <div class="question">
+                <label>¿Dónde sueles informarte?</label>
+                <input type="radio" id="social-media" name="info-source" value="Redes sociales" required>
+                <label for="social-media">Redes sociales</label>
+                <input type="radio" id="media" name="info-source" value="Medios de comunicación">
+                <label for="media">Medios de comunicación</label>
+            </div>
+
+            <div class="question">
+                <label>¿Cuánto te fías de los medios de comunicación?</label>
+                <div>
+                    <input type="radio" id="trust-media-1" name="trust-media" value="1" required>
+                    <label for="trust-media-1">1</label>
+                    <input type="radio" id="trust-media-2" name="trust-media" value="2">
+                    <label for="trust-media-2">2</label>
+                    <input type="radio" id="trust-media-3" name="trust-media" value="3">
+                    <label for="trust-media-3">3</label>
+                    <input type="radio" id="trust-media-4" name="trust-media" value="4">
+                    <label for="trust-media-4">4</label>
+                    <input type="radio" id="trust-media-5" name="trust-media" value="5">
+                    <label for="trust-media-5">5</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>¿Cuánto te fías de las redes sociales como medios de comunicación?</label>
+                <div>
+                    <input type="radio" id="trust-social-1" name="trust-social" value="1" required>
+                    <label for="trust-social-1">1</label>
+                    <input type="radio" id="trust-social-2" name="trust-social" value="2">
+                    <label for="trust-social-2">2</label>
+                    <input type="radio" id="trust-social-3" name="trust-social" value="3">
+                    <label for="trust-social-3">3</label>
+                    <input type="radio" id="trust-social-4" name="trust-social" value="4">
+                    <label for="trust-social-4">4</label>
+                    <input type="radio" id="trust-social-5" name="trust-social" value="5">
+                    <label for="trust-social-5">5</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label>¿Crees que los medios de comunicación tienden a difundir más bulos?</label>
+                <input type="radio" id="media-bullets-yes" name="media-bullets" value="Sí" required>
+                <label for="media-bullets-yes">Sí</label>
+                <input type="radio" id="media-bullets-no" name="media-bullets" value="No">
+                <label for="media-bullets-no">No</label>
+            </div>
+
+            <div class="question">
+                <label>¿Crees que las redes sociales tienden a difundir más bulos?</label>
+                <input type="radio" id="social-bullets-yes" name="social-bullets" value="Sí" required>
+                <label for="social-bullets-yes">Sí</label>
+                <input type="radio" id="social-bullets-no" name="social-bullets" value="No">
+                <label for="social-bullets-no">No</label>
+            </div>
+
+            <div class="question">
+                <label>¿Qué te parece la tendencia de los medios de incluir influencers en la televisión?</label>
+                <textarea id="influencer-opinion" name="influencer-opinion"></textarea>
+            </div>
+
+            <div class="question">
+                <label>¿Algo que creas que debamos tener en cuenta?</label>
+                <textarea id="additional-comments" name="additional-comments"></textarea>
+            </div>
+
+            <div class="question">
+                <label for="email">Tu Gmail para contactar:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
